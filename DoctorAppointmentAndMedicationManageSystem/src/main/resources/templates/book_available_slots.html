@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Slots</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h2>Available Slots</h2>
+
+    <div th:if="${param.error}">
+        <div class="alert alert-danger">Slot booking failed. Please try again.</div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${availableSlots}">
+            <td th:text="${appointment.startTime}"></td>
+            <td th:text="${appointment.endTime}"></td>
+            <td>
+                <form th:action="@{/api/patient/bookSlot}" method="post">
+                    <input type="hidden" name="slotId" th:value="${appointment.id}">
+                    <!-- <input type="hidden" name="patientEmail" th:value="{$patient.email}"> -->
+                    <button type="submit" class="btn btn-primary">Book</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

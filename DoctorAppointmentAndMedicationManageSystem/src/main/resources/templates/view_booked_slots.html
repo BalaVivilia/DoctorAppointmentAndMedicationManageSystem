@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor - Booked Slots</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h3>Booked Slots</h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Booked By (Patient Email)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${bookedSlots}">
+            <td th:text="${appointment.startTime}"></td>
+            <td th:text="${appointment.endTime}"></td>
+            <td th:text="${appointment.patient.email}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
